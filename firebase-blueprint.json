@@ -1,0 +1,103 @@
+{
+  "entities": {
+    "User": {
+      "title": "User",
+      "description": "User profile information",
+      "type": "object",
+      "properties": {
+        "name": { "type": "string" },
+        "email": { "type": "string", "format": "email" },
+        "plan": { "type": "string", "enum": ["free", "pro", "lifetime"] },
+        "created_at": { "type": "string", "format": "date-time" }
+      },
+      "required": ["name", "email", "plan", "created_at"]
+    },
+    "Income": {
+      "title": "Income",
+      "description": "Income records",
+      "type": "object",
+      "properties": {
+        "user_id": { "type": "string" },
+        "source": { "type": "string" },
+        "amount": { "type": "number" },
+        "date": { "type": "string", "format": "date-time" }
+      },
+      "required": ["user_id", "source", "amount", "date"]
+    },
+    "Expense": {
+      "title": "Expense",
+      "description": "Expense records",
+      "type": "object",
+      "properties": {
+        "user_id": { "type": "string" },
+        "category": { "type": "string" },
+        "amount": { "type": "number" },
+        "date": { "type": "string", "format": "date-time" }
+      },
+      "required": ["user_id", "category", "amount", "date"]
+    },
+    "Investment": {
+      "title": "Investment",
+      "description": "Investment records",
+      "type": "object",
+      "properties": {
+        "user_id": { "type": "string" },
+        "type": { "type": "string" },
+        "amount": { "type": "number" },
+        "returns": { "type": "number" }
+      },
+      "required": ["user_id", "type", "amount", "returns"]
+    },
+    "Debt": {
+      "title": "Debt",
+      "description": "Debt records",
+      "type": "object",
+      "properties": {
+        "user_id": { "type": "string" },
+        "type": { "type": "string" },
+        "total_amount": { "type": "number" },
+        "interest_rate": { "type": "number" }
+      },
+      "required": ["user_id", "type", "total_amount", "interest_rate"]
+    },
+    "Goal": {
+      "title": "Goal",
+      "description": "Financial goals",
+      "type": "object",
+      "properties": {
+        "user_id": { "type": "string" },
+        "name": { "type": "string" },
+        "target_amount": { "type": "number" },
+        "saved_amount": { "type": "number" },
+        "deadline": { "type": "string", "format": "date-time" }
+      },
+      "required": ["user_id", "name", "target_amount", "saved_amount", "deadline"]
+    }
+  },
+  "firestore": {
+    "/users/{userId}": {
+      "schema": { "$ref": "#/entities/User" },
+      "description": "User profiles"
+    },
+    "/income/{incomeId}": {
+      "schema": { "$ref": "#/entities/Income" },
+      "description": "Income records"
+    },
+    "/expenses/{expenseId}": {
+      "schema": { "$ref": "#/entities/Expense" },
+      "description": "Expense records"
+    },
+    "/investments/{investmentId}": {
+      "schema": { "$ref": "#/entities/Investment" },
+      "description": "Investment records"
+    },
+    "/debts/{debtId}": {
+      "schema": { "$ref": "#/entities/Debt" },
+      "description": "Debt records"
+    },
+    "/goals/{goalId}": {
+      "schema": { "$ref": "#/entities/Goal" },
+      "description": "Financial goals"
+    }
+  }
+}
